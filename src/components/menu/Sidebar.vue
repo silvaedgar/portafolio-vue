@@ -52,7 +52,8 @@ body {
 .menu {
   display: block;
   position: absolute;
-  background-color: #67b588;
+  /* background-color: #67b588; */
+  background-color: blue;
   height: calc(max-content);
   min-height: 100vh;
   /* overflow-y: auto; */
