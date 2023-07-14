@@ -273,7 +273,7 @@ li {
   .image-profile {
     display: absolute;
     top: 40%;
-    /* z-index: 12; */
+    z-index: 12;
   }
   .skills div {
     display: grid;
