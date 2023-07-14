@@ -147,7 +147,7 @@ function deleteBoard(boardCurrent) {
 
 .boards {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
   margin-top: 30px;
 }
@@ -177,5 +177,17 @@ function deleteBoard(boardCurrent) {
   padding: 5px;
   box-sizing: border-box;
   text-align: center;
+}
+
+@media (max-width: 500px) {
+  .boards {
+    display: block;
+    padding: 0px 25px 0px 25px;
+    justify-content: center;
+  }
+
+  .board {
+    margin-top: 10px;
+  }
 }
 </style>

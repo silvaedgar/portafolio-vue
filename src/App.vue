@@ -1,12 +1,12 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
-import Sidebar from "./components/menu/Sidebar.vue";
+import Sidebar from "./components/layouts/Sidebar.vue";
 
 export default {
   components: {
     Sidebar,
   },
 };
+
 </script>
 
 <template>
@@ -15,4 +15,21 @@ export default {
   </header>
 </template>
 
-<style></style>
+<style>
+
+.btn-sm {
+  border-radius: 3px;
+  box-shadow: 2px 2px rgba(0,0,255,0.3);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #67b588;
+  color: white;
+}
+
+.w-30 {
+  min-width: 5%;
+}
+</style>

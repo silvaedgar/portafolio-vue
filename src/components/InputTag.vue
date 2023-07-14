@@ -38,7 +38,7 @@ export default {
           {{ tag }} <button @click="deleteTag(tag)">X</button>
         </div>
       </div>
-      <input type="text" v-model="currentValue" @keydown="handleKeyDown" />
+      <input type="textarea" v-model="currentValue" @keydown="handleKeyDown" />
     </div>
   </div>
 </template>
@@ -47,13 +47,16 @@ export default {
 .container {
   background-color: blue;
   margin: 20px;
+  text-align: center;
+  min-height: 45px;
+  height: auto;
 }
 .inputTag {
   display: inline-flex;
   border: solid 1px blue;
   min-height: 35px;
-  /* margin: 250px 400px; */
-  margin: 20px calc(100% / 2 - 200px);
+  margin-top: 4.5px;
+  height: auto;
 }
 
 .tags {
@@ -61,6 +64,8 @@ export default {
   gap: 3px;
   padding: 3px;
   background-color: #ffffff;
+  max-width: 70%;
+  overflow-wrap: break-word;
 }
 
 .tags .tag {
@@ -71,11 +76,14 @@ export default {
   gap: 5px;
   align-items: center;
   background-color: #f5f5f5;
+  justify-content: center;
 }
 
 .inputTag input {
   border: none;
   outline: none;
+  /* z-index: 5;
+  position: relative; */
 }
 
 .inputTag button {

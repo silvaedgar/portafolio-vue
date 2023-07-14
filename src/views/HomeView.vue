@@ -1,10 +1,36 @@
-<script setup></script>
+<script setup>
+import Home from '@/components/Home.vue';
+import {  ref } from 'vue';
 
+const homeActive = ref(true)
+
+function toggleHome() {
+   homeActive.value = !homeActive.value;
+}
+
+</script> 
 <template>
-  <main>hOME</main>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, quibusdam
-  quam! Magnam corrupti mollitia alias harum sequi ullam id ex accusantium
-  consequuntur ducimus unde a nihil et voluptas, reiciendis qui?
+  <main>
+    <div v-if="homeActive">
+      <Home @close="toggleHome" :homeActive="homeActive" />
+    </div>
+    <div class="container" v-if="!homeActive">
+      <div class="homeInactive">
+        <h3>Mostrar Información de Edgar Silva</h3>
+        <button @click="toggleHome" type="button">
+          Detalles
+        </button>
+      </div>
+    </div>
+  </main>
 </template>
 
-<style></style>
+<style scoped>
+.homeInactive {
+  background-color: blue;
+  text-align: center;
+  color: white;
+
+}
+</style>
+

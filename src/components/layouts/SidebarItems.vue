@@ -2,17 +2,18 @@
 import { RouterView } from "vue-router";
 
 const props = defineProps(["item", "collapsed"]);
+
 </script>
 
 <template>
-  <RouterLink :to="props.item.link">
-    <div class="item">
+  <a ><RouterLink :to="props.item.link" :title="props.item.title" >
+    <div class="item" @click="verify">
       <div class="icon">
         <font-awesome-icon :icon="['fa-solid', props.item.icon]" />
       </div>
-      <div class="title" v-if="!collapsed">{{ props.item.title }}</div>
+      <div class="title" v-if="!collapsed">{{ props.item.title }} </div>
     </div>
-  </RouterLink>
+  </RouterLink></a>
 </template>
 
 <style scoped>
@@ -21,6 +22,11 @@ a {
   text-decoration: none;
   display: block;
 }
+
+/* a:link {
+  background-color: #67b588;
+} */
+
 
 .item {
   display: flex;
@@ -31,9 +37,15 @@ a {
   padding: 10px;
 }
 
+a:focus {
+  background: black;
+  color: white;
+}
 .item:hover {
   background-color: black;
+  color: white;
 }
+
 
 @media (max-width: 1000px) {
   .title {

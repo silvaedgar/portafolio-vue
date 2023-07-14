@@ -3,11 +3,13 @@ import InputTag from "../components/InputTag.vue";
 </script>
 
 <template>
-  <h3>
-    Este Componente realiza Inputs de Etiquetas. Ingrese en el cuadro de texto,
-    diferentes valores y presione la tecla Enter
-  </h3>
-  <InputTag />
+  <div>
+    <h3>
+      Este Componente realiza Inputs de Etiquetas. Ingrese en el cuadro de
+      texto, diferentes valores y presione la tecla Enter
+    </h3>
+    <InputTag />
+  </div>
 </template>
 
 <style scoped>

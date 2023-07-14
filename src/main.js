@@ -44,3 +44,6 @@ app.use(createPinia());
 app.use(router);
 
 app.mount("#app");
+
+export const nameApp = import.meta.env.VITE_NAME_APP;
+console.log("MAIN.JS");

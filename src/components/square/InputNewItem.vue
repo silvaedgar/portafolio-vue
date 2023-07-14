@@ -18,6 +18,9 @@ function handleSubmit() {
 </script>
 
 <style scoped>
+input {
+  width: 100%;
+}
 .new-item {
   padding: 10px;
 }
