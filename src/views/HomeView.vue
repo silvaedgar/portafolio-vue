@@ -16,21 +16,12 @@ function toggleHome() {
     </div>
     <div class="container" v-if="!homeActive">
       <div class="homeInactive">
-        <h3>Mostrar Información de Edgar Silva</h3>
-        <button @click="toggleHome" type="button">
-          Detalles
-        </button>
+        <p>Hola, bienvenido soy Edgar R Silva G, vivo en Maracaibo-Venezuela, egresado como Licenciado en Computación en La Universidad del Zulia en el año de 1995. Soy programador freelance y docente universitario, carreras compartidas en mi quehacer profesional, con dedicación y responsabilidad. Soy un autodidacta al 100%; aficionado al deporte y fanatico del béisbol, fútbol y baloncesto. ¿Quieres saber mas de mi? <a @click="toggleHome"> Haz click aqui</a></p>
       </div>
     </div>
   </main>
 </template>
 
 <style scoped>
-.homeInactive {
-  background-color: blue;
-  text-align: center;
-  color: white;
-
-}
 </style>
 

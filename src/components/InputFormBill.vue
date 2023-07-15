@@ -7,24 +7,62 @@ import {
   pay,
 } from "../stores/storeBill.js";
 
-const total = ref(0);
-const peopleNumbers = ref(0);
-const tip = ref(0);
+const total = ref("");
+const peopleNumbers = ref("");
+const tip = ref("");
 
 function handleSubmit() {
-  dataBill.params.total = total;
-  dataBill.params.peopleNumbers = peopleNumbers;
-  dataBill.params.tip = tip;
-  console.log("DATA BILL HANDLER SUBMIT", dataBill);
-  calculate();
-  console.log(dataBill);
+  console.log("BILL ", dataBill)
+  if (total != '' && peopleNumbers != '') {
+    dataBill.params.total = total;
+    dataBill.params.peopleNumbers = peopleNumbers;
+    dataBill.params.tip = tip;
+    calculate();
+  }
 }
 
 function handlePaid(e, people) {
   let namePerson = "";
   if (e.target.checked) namePerson = prompt("Ingrese el Nombre de la Persona");
-
   pay(people.id, e.target.checked, namePerson);
+}
+
+function numberMask(nro, decimals) {
+  var numberText = nro;
+  numberText = numberText.replace(/([^0-9\.]+)/g, "");
+
+  let arrayNumber = numberText.split(".");
+  let intPart = arrayNumber[0];
+  numberText = intPart
+    .toString()
+    .split("")
+    .reverse()
+    .join("")
+    .replace(/(\d{3})/g, "$1,");
+  // lo anterior invierte el nro colocando una coma cada 3 digitos (111, o 002,1)
+  numberText = numberText.split("").reverse().join("").replace(/^[\,]/, "");
+  // lo anterior vuelve a invertir el numero con la coma incluida (1,200)
+  // numberText = numberText.replace(/0(\d)/, '$1')
+  // console.log("AFTER last REPL ", numberText)
+  if (arrayNumber[1] != undefined) {
+    let decimalPart = arrayNumber[1];
+    switch (decimals) {
+      case 4:
+        decimalPart = decimalPart.replace(/(\d)(\d)(\d)(\d)(\d)*/g, "$1$2$3$4");
+        break;
+      case 3:
+        decimalPart = decimalPart.replace(/(\d)(\d)(\d)(\d)*/g, "$1$2$3");
+        break;
+      case 0:
+        decimalPart = decimalPart.replace(/[*]/g, "");
+        break;
+      default:
+        decimalPart = decimalPart.replace(/(\d)(\d)(\d)*/g, "$1$2");
+    }
+    if (decimals > 0) numberText = numberText + "." + decimalPart;
+  }
+  handleSubmit();
+  return numberText;
 }
 </script>
 
@@ -33,17 +71,38 @@ function handlePaid(e, people) {
     <form class="mount-container" @submit.prevent="handleSubmit">
       <div>
         <label for="total">Total </label>
-        <input type="number" v-model="total" id="total" />
+        <input
+          class="input-value"
+          type="text"
+          v-model="total"
+          id="total"
+          @change="total = numberMask(total, 2)"
+          @keyup="total = numberMask(total, 2)"
+        />
       </div>
       <div>
         <label for="tip">% Propina </label>
-        <input type="number" v-model="tip" id="tip" />
+        <input
+          type="text"
+          v-model="tip"
+          id="tip"
+          class="input-value"
+          @change="tip = numberMask(tip, 2)"
+          @keyup="tip = numberMask(tip, 2)"
+        />
       </div>
       <div>
         <label for="people">Personas </label>
-        <input type="number" v-model="peopleNumbers" id="people" />
+        <input
+          type="text"
+          v-model="peopleNumbers"
+          id="people"
+          class="input-value"
+          @change="peopleNumbers = numberMask(peopleNumbers, 0)"
+          @keyup="peopleNumbers = numberMask(peopleNumbers, 0)"
+        />
       </div>
-      <button class="btn-submit" type="submit">Calcular</button>
+      <!-- <button class="btn-sm btn-primary" type="submit">Calcular</button> -->
     </form>
 
     <div class="people-container">
@@ -77,6 +136,7 @@ function handlePaid(e, people) {
       <div class="people">
         <div
           v-for="people in dataBill.people"
+          :key="people.id"
           :class="people.paid ? 'person-paid' : 'person-no-paid'"
         >
           <div class="persona" v-if="!people.name">
@@ -162,6 +222,17 @@ function handlePaid(e, people) {
 .mount-container div input {
   width: 60%;
   display: inline-flex;
+  min-height: 30px;
+  padding: 7px;
+  font-size: medium;
+  height: auto;
+  border: aqua 1px solid;
+}
+
+.mount-container div input:focus {
+  /* border: #67b588 1px solid; */
+  outline-color: aqua;
+  outline-width: 0px;
 }
 
 .people-container {

@@ -27,9 +27,27 @@ export default {
 .btn-primary {
   background-color: #67b588;
   color: white;
+  border: #67b588 1px solid;
 }
 
 .w-30 {
   min-width: 5%;
 }
+
+.homeInactive {
+  text-align: center;
+  color: black;
+  padding: 10px 50px 40px 50px;
+  text-align: justify;
+}
+
+a {
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
+.homeInactive p {
+  font-weight: bold;
+}
+
 </style>

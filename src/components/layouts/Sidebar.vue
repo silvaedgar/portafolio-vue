@@ -4,11 +4,6 @@ import menuItems from "./menuItem";
 import SidebarItems from "./SidebarItems.vue";
 
 const nameApp = import.meta.env.VITE_APP_NAME;
-const itemClose = ref({
-  title: "Cerrar Sesion",
-  icon: "fa-arrow-right-from-bracket",
-  link: "/",
-});
 
 const collapsed = ref(false);
 </script>

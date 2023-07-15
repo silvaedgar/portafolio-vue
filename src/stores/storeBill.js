@@ -2,7 +2,7 @@ import { reactive } from "vue";
 
 export const dataBill = reactive({
   params: {
-    total: 0,
+    total: "",
     tip: 0,
     peopleNumbers: 0,
     remaining: 0,
@@ -11,14 +11,16 @@ export const dataBill = reactive({
 });
 
 export function getGrandTotal() {
-  return dataBill.params.total * (dataBill.params.tip / 100 + 1);
+  const totalStr = dataBill.params.total.replace(/[^0-9]*/g,"")
+  const  total = parseFloat(totalStr).toFixed(2);
+  console.log("GRAND TOTAL ", total)
+
+  return total * (dataBill.params.tip / 100 + 1);
 }
 
 export function calculate() {
   dataBill.people = [];
-  console.log("DATA BILL CALCULATE BEORE ", dataBill);
 
-  const total = dataBill.params.total;
   const tip = dataBill.params.tip;
   const peopleNumbers = dataBill.params.peopleNumbers;
   const totalPerPerson = getGrandTotal() / peopleNumbers;
@@ -33,7 +35,6 @@ export function calculate() {
       totalPerPerson,
     });
   }
-  console.log("DATA BILL CALCULATE ", dataBill);
   calculateRemaining();
 }
 
