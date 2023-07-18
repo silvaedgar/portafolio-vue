@@ -13,8 +13,6 @@ export const dataBill = reactive({
 export function getGrandTotal() {
   const totalStr = dataBill.params.total.replace(/[^0-9]*/g,"")
   const  total = parseFloat(totalStr).toFixed(2);
-  console.log("GRAND TOTAL ", total)
-
   return total * (dataBill.params.tip / 100 + 1);
 }
 

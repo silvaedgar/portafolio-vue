@@ -44,5 +44,14 @@ export default {
       active: false
 
     },
+    {
+      id: 5,
+      title: "Crud",
+      icon: "fa-pen-to-square",
+      link: "crud",
+      active: false
+
+    },
+
   ],
 };

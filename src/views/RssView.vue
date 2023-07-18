@@ -1,7 +1,7 @@
 <template>
   <main>
   <Modal @close="toggleModal" :modalActive="modalActive" />
-  <div class="modalInactive" v-if="!modalActive">
+  <div class="header-message" v-if="!modalActive">
     <h3>Componente que permite agregar Canales RSS y ver las noticios</h3>
     <button @click="toggleModal" class="btn-sm btn-primary">
       Abrir Canal
@@ -41,5 +41,8 @@ export default {
 .modalInactive h3 {
   margin-bottom: 25px;
   font-weight: bold;
+}
+.header-message button {
+  margin-top: 10px;
 }
 </style>

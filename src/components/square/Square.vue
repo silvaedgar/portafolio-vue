@@ -90,34 +90,36 @@ function deleteBoard(boardCurrent) {
 </script>
 
 <template>
-  <nav class="nav">
-    <ul>
-      <li><a href="#" @click="createBoard">Crear Tablero</a></li>
-    </ul>
-  </nav>
-  <div class="boards-container">
-    <div class="boards">
-      <div
-        class="board"
-        v-for="board in boards"
-        @drop="onDrop($event, board)"
-        @dragover.prevent
-        @dragenter.prevent
-      >
-        <div class="board-name">
-          {{ board.name }} <button @click="deleteBoard(board)">X</button>
-        </div>
-        <InputNewItem
-          @create-new-item="(newItem) => addNewItem(newItem, board)"
-        />
-        <div class="items">
-          <div
-            class="item"
-            v-for="item in board.items"
-            draggable="true"
-            @dragstart="startDrag($event, board, item)"
-          >
-            {{ item.title }}
+  <div>
+    <nav class="nav">
+      <ul style="margin-top:30px">
+        <li><a href="#" @click="createBoard">Crear Tablero</a></li>
+      </ul>
+    </nav>
+    <div class="boards-container">
+      <div class="boards">
+        <div
+          class="board"
+          v-for="board in boards" :key="board.id"
+          @drop="onDrop($event, board)"
+          @dragover.prevent
+          @dragenter.prevent
+        >
+          <div class="board-name">
+            {{ board.name }} <button @click="deleteBoard(board)">X</button>
+          </div>
+          <InputNewItem
+            @create-new-item="(newItem) => addNewItem(newItem, board)"
+          />
+          <div class="items">
+            <div
+              class="item"
+              v-for="item in board.items" :key="item.id"
+              draggable="true"
+              @dragstart="startDrag($event, board, item)"
+            >
+              {{ item.title }}
+            </div>
           </div>
         </div>
       </div>

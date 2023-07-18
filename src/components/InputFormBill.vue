@@ -6,14 +6,20 @@ import {
   calculate,
   pay,
 } from "../stores/storeBill.js";
+import { numberMask } from "../stores/storeNumberFormat";
 
 const total = ref("");
 const peopleNumbers = ref("");
 const tip = ref("");
 
+function calculateTotal(nro, decimals) {
+  const totalTMP = numberMask(nro, decimals);
+  handleSubmit();
+  return totalTMP;
+}
+
 function handleSubmit() {
-  console.log("BILL ", dataBill)
-  if (total != '' && peopleNumbers != '') {
+  if (total != "" && peopleNumbers != "") {
     dataBill.params.total = total;
     dataBill.params.peopleNumbers = peopleNumbers;
     dataBill.params.tip = tip;
@@ -25,44 +31,6 @@ function handlePaid(e, people) {
   let namePerson = "";
   if (e.target.checked) namePerson = prompt("Ingrese el Nombre de la Persona");
   pay(people.id, e.target.checked, namePerson);
-}
-
-function numberMask(nro, decimals) {
-  var numberText = nro;
-  numberText = numberText.replace(/([^0-9\.]+)/g, "");
-
-  let arrayNumber = numberText.split(".");
-  let intPart = arrayNumber[0];
-  numberText = intPart
-    .toString()
-    .split("")
-    .reverse()
-    .join("")
-    .replace(/(\d{3})/g, "$1,");
-  // lo anterior invierte el nro colocando una coma cada 3 digitos (111, o 002,1)
-  numberText = numberText.split("").reverse().join("").replace(/^[\,]/, "");
-  // lo anterior vuelve a invertir el numero con la coma incluida (1,200)
-  // numberText = numberText.replace(/0(\d)/, '$1')
-  // console.log("AFTER last REPL ", numberText)
-  if (arrayNumber[1] != undefined) {
-    let decimalPart = arrayNumber[1];
-    switch (decimals) {
-      case 4:
-        decimalPart = decimalPart.replace(/(\d)(\d)(\d)(\d)(\d)*/g, "$1$2$3$4");
-        break;
-      case 3:
-        decimalPart = decimalPart.replace(/(\d)(\d)(\d)(\d)*/g, "$1$2$3");
-        break;
-      case 0:
-        decimalPart = decimalPart.replace(/[*]/g, "");
-        break;
-      default:
-        decimalPart = decimalPart.replace(/(\d)(\d)(\d)*/g, "$1$2");
-    }
-    if (decimals > 0) numberText = numberText + "." + decimalPart;
-  }
-  handleSubmit();
-  return numberText;
 }
 </script>
 
@@ -76,8 +44,8 @@ function numberMask(nro, decimals) {
           type="text"
           v-model="total"
           id="total"
-          @change="total = numberMask(total, 2)"
-          @keyup="total = numberMask(total, 2)"
+          @change.prevent="total = calculateTotal(total, 2)"
+          @keyup.prevent="total = calculateTotal(total, 2)"
         />
       </div>
       <div>
@@ -87,8 +55,8 @@ function numberMask(nro, decimals) {
           v-model="tip"
           id="tip"
           class="input-value"
-          @change="tip = numberMask(tip, 2)"
-          @keyup="tip = numberMask(tip, 2)"
+          @change.prevent="tip = calculateTotal(tip, 2)"
+          @keyup.prevent="tip = calculateTotal(tip, 2)"
         />
       </div>
       <div>
@@ -98,8 +66,8 @@ function numberMask(nro, decimals) {
           v-model="peopleNumbers"
           id="people"
           class="input-value"
-          @change="peopleNumbers = numberMask(peopleNumbers, 0)"
-          @keyup="peopleNumbers = numberMask(peopleNumbers, 0)"
+          @change.prevent="peopleNumbers = calculateTotal(peopleNumbers, 0)"
+          @keyup.prevent="peopleNumbers = calculateTotal(peopleNumbers, 0)"
         />
       </div>
       <!-- <button class="btn-sm btn-primary" type="submit">Calcular</button> -->
@@ -229,11 +197,15 @@ function numberMask(nro, decimals) {
   border: aqua 1px solid;
 }
 
+
+
 .mount-container div input:focus {
   /* border: #67b588 1px solid; */
-  outline-color: aqua;
-  outline-width: 0px;
-}
+    border: 5px solid rgb(199, 199, 245);
+    outline-color: blue;
+  }
+
+
 
 .people-container {
   margin-top: 10px;
@@ -305,6 +277,7 @@ function numberMask(nro, decimals) {
   .mount-container div input {
     width: 45%;
   }
+
 }
 
 /* Media Query Maximo 600px */
@@ -324,5 +297,6 @@ function numberMask(nro, decimals) {
   .mount-container div input {
     width: 45%;
   }
+
 }
 </style>

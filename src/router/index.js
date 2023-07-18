@@ -29,14 +29,18 @@ const router = createRouter({
     {
       path: "/bill",
       name: "bill",
-      component: () => import("../views/BillView.vue"),
+      component: () => import("@/views/BillView.vue"),
     },
     {
       path: "/rss",
       name: "rss",
-      component: () => import("../views/RssView.vue"),
+      component: () => import("@/views/RssView.vue"),
     },
-
+    {
+      path: "/crud",
+      name: "crud",
+      component: () => import("../views/CrudView.vue"),
+    },
     {
       path: "/:notFound",
       component: () => import("../views/NotFound.vue"),

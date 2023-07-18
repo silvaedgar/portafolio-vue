@@ -20,6 +20,7 @@ import {
   faSquarePollVertical,
   faMoneyBills,
   faRss,
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -32,6 +33,7 @@ library.add(faTag);
 library.add(faSquarePollVertical);
 library.add(faMoneyBills);
 library.add(faRss);
+library.add(faPenToSquare);
 
 import App from "./App.vue";
 import router from "./router";
@@ -46,4 +48,3 @@ app.use(router);
 app.mount("#app");
 
 export const nameApp = import.meta.env.VITE_NAME_APP;
-console.log("MAIN.JS");
